@@ -1,0 +1,210 @@
+:root {
+    --primary-color: #00b7af;
+    --text-color: #ffffff;
+    --bg-overlay: rgba(16, 24, 31, 0.6);
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --card-border: rgba(255, 255, 255, 0.2);
+    --today-bg: rgba(0, 183, 175, 0.8);
+    --other-month-color: rgba(255, 255, 255, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #10181f;
+    color: var(--text-color);
+}
+
+.background-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://picsum.photos/1920/1080?random=1');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    transition: background-image 1s ease-in-out;
+}
+
+.background-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-overlay);
+    backdrop-filter: blur(5px);
+    z-index: -1;
+}
+
+.app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 4vmin;
+}
+
+.calendar-card {
+    display: flex;
+    flex-direction: row;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    max-height: 800px;
+    overflow: hidden;
+}
+
+.date-time-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.2);
+    border-right: 1px solid var(--card-border);
+    text-align: center;
+}
+
+.clock {
+    font-size: 8vmin;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.current-date {
+    font-size: 3.5vmin;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.calendar-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.calendar-header h2 {
+    font-size: 4vmin;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.calendar-grid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: 600;
+    font-size: 2.2vmin;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 10px;
+    flex: 1;
+}
+
+.day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vmin;
+    font-weight: 500;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.day.other-month {
+    color: var(--other-month-color);
+    background: transparent;
+}
+
+.day.today {
+    background: var(--today-bg);
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0, 183, 175, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-aspect-ratio: 1/1) {
+    .calendar-card {
+        flex-direction: column;
+        max-height: none;
+    }
+
+    .date-time-section {
+        flex: 0 0 auto;
+        border-right: none;
+        border-bottom: 1px solid var(--card-border);
+        padding: 30px;
+    }
+
+    .clock {
+        font-size: 12vmin;
+    }
+
+    .current-date {
+        font-size: 5vmin;
+    }
+
+    .calendar-section {
+        padding: 30px;
+    }
+
+    .calendar-header h2 {
+        font-size: 6vmin;
+    }
+
+    .weekdays {
+        font-size: 3.5vmin;
+    }
+
+    .day {
+        font-size: 4.5vmin;
+    }
+}
